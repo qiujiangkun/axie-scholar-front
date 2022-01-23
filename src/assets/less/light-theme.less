@@ -1,0 +1,16 @@
+@import "~antd/lib/style/color/colorPalette.less";
+@import "~antd/dist/antd.less";
+@import "~antd/lib/style/themes/default.less";
+@import "./styles/styles.less";
+@import "./styles/themes/light.less";
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: none !important;
+}
+
+.ant-menu-inline .ant-menu-item::after,
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after {
+  border-right: none;
+}
