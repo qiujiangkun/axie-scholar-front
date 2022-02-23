@@ -266,6 +266,7 @@ function PaymentModal({ modalInfo, isShowModal, closeModal, handleCancel, setLoa
     if(modalInfo.id == -1) {
       setLoading(true);
 			fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars', {method: 'POST', headers: {...authHeader(), 'Content-Type': 'application/json'}, body: JSON.stringify(postdata)}).then(resp=>{
+        // eslint-disable-next-line no-restricted-globals
         if(resp.status == 403) history.push('/auth/login')
         return resp.json();
       }).then(res => {
@@ -281,6 +282,7 @@ function PaymentModal({ modalInfo, isShowModal, closeModal, handleCancel, setLoa
     else {
       setLoading(true);
 			fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars/' + modalInfo.id, {method: 'PUT', headers: {...authHeader(), 'Content-Type': 'application/json'}, body: JSON.stringify(postdata)}).then(resp=>{
+        // eslint-disable-next-line no-restricted-globals
         if(resp.status == 403) history.push('/auth/login')
         if(resp.status == 200) {
           resp.json().then(res => {

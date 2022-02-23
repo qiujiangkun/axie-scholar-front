@@ -1,3 +1,9 @@
+# Notice
+We may want node 12-14
+and CXXFLAGS="--std=c++14" npm install
+
+To build, run `npn run-script build`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
