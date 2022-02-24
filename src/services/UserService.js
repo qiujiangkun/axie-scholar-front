@@ -1,4 +1,5 @@
 import { authHeader } from '../helpers';
+import {API_BASE_URL} from "../configs/AppConfig";
 
 const userService = {
     login,
@@ -18,7 +19,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users/authenticate`, requestOptions)
+    return fetch(`${API_BASE_URL}/api/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -38,7 +39,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users`, requestOptions).then(handleResponse).catch(err=> { throw err; });
+    return fetch(`${API_BASE_URL}/api/users`, requestOptions).then(handleResponse).catch(err=> { throw err; });
 }
 
 function getById(id) {
@@ -47,7 +48,7 @@ function getById(id) {
         headers: authHeader()
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users/${id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
+    return fetch(`${API_BASE_URL}/api/users/${id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
 }
 
 function register(user) {
@@ -57,7 +58,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users/register`, requestOptions).then(handleResponse).then(user => {
+    return fetch(`${API_BASE_URL}/api/users/register`, requestOptions).then(handleResponse).then(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('axie_user', JSON.stringify(user));
         return user;
@@ -71,7 +72,7 @@ function update(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users/${user.id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
+    return fetch(`${API_BASE_URL}/api/users/${user.id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -81,7 +82,7 @@ function _delete(id) {
         headers: authHeader()
     };
 
-    return fetch(`${process.env.REACT_APP_BACKEND_API}/api/users/${id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
+    return fetch(`${API_BASE_URL}/api/users/${id}`, requestOptions).then(handleResponse).catch(err=> { throw err; });
 }
 
 function handleResponse(response) {
