@@ -1,7 +1,13 @@
 # Notice
-We may want node 12-14
-and CXXFLAGS="--std=c++14" npm install
+We may want node 14
 
+```shell
+apt install nodeenv
+nodeenv env --node=14.0.0
+. env/bin/activate
+npm install
+npm run-script start
+```
 To build, run `npn run-script build`
 
 # Getting Started with Create React App
