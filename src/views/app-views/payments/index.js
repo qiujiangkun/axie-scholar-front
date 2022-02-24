@@ -15,6 +15,7 @@ import RJSSocket from './Components/RJSSocket';
 import { toast } from 'react-toastify';
 import fileDownload from 'js-file-download';
 import { Button } from "antd";
+import {API_BASE_URL} from "../../../configs/AppConfig";
 const ListBtnSection = styled.div`
   margin-top: 30px;
 `;
@@ -119,7 +120,7 @@ function Payments() {
       return;
     }
       setLoading(true);
-      fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars/' + JSON.stringify(selectedRowKeys), {method: 'DELETE', headers: authHeader()}).then(resp => {
+      fetch(API_BASE_URL + '/api/scholars/' + JSON.stringify(selectedRowKeys), {method: 'DELETE', headers: authHeader()}).then(resp => {
         if(resp.status == 403) history.push('/auth/login')
         return resp.json();
       }).then(res => {
@@ -138,7 +139,7 @@ function Payments() {
     }
     const addresses = scholars.filter(row => selectedRowKeys.indexOf(row.id) !== -1).map(row => row.address);
       console.log(addresses);
-      fetch(process.env.REACT_APP_BACKEND_API + '/api/claim', {
+      fetch(API_BASE_URL + '/api/claim', {
         method: 'POST',
         body: JSON.stringify({ addresses }),
         headers: {...authHeader(), 'Content-Type': 'application/json'}
@@ -159,7 +160,7 @@ function Payments() {
     }
     const addresses = scholars.filter(row => selectedRowKeys.indexOf(row.id) !== -1).map(row => row.address);
       console.log(addresses);
-      fetch(process.env.REACT_APP_BACKEND_API + '/api/pay', {
+      fetch(API_BASE_URL + '/api/pay', {
         method: 'POST',
         body: JSON.stringify({ addresses }),
         headers: {...authHeader(), 'Content-Type': 'application/json'}
@@ -175,7 +176,7 @@ function Payments() {
 
   const onRefreshClick = () => {
     if(selectedRowKeys.length) {
-      fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars/refresh/' + JSON.stringify(selectedRowKeys), {method: "POST"}).then(resp => {
+      fetch(API_BASE_URL + '/api/scholars/refresh/' + JSON.stringify(selectedRowKeys), {method: "POST"}).then(resp => {
         console.log(resp.status);
         dispatch({type: "UPDATE_SCHOLARS", payload: selectedRowKeys.map(id=>{
           return {id: id, total: null, balance: null, last_time: null};
@@ -194,8 +195,8 @@ function Payments() {
       end_date: Date.now(),
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_API}/api/scholars/download_csv_file`, {method: "POST", body: JSON.stringify(sendData), headers: {...authHeader(), 'Content-Type': 'application/json'}}).then(resp => resp.json()).then(res => {
-      fetch(`${process.env.REACT_APP_BACKEND_API}/${res.path}`, {
+    fetch(`${API_BASE_URL}/api/scholars/download_csv_file`, {method: "POST", body: JSON.stringify(sendData), headers: {...authHeader(), 'Content-Type': 'application/json'}}).then(resp => resp.json()).then(res => {
+      fetch(`${API_BASE_URL}/${res.path}`, {
         method: "GET",
         headers: {responseType: 'blob'}
       }).then(resp => resp.text()).then(res => {
@@ -230,7 +231,7 @@ function Payments() {
 
   const updateTable = () => {
 		setLoading(true);
-		fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars', {method: 'GET', headers: authHeader()}).then(resp => {
+		fetch(API_BASE_URL + '/api/scholars', {method: 'GET', headers: authHeader()}).then(resp => {
       if(resp.status == 403) history.push('/auth/login')
       return resp.json()
     }).then(res => {
@@ -274,7 +275,7 @@ function Payments() {
           body: JSON.stringify({ scholars: new_data }),
           headers: {...authHeader(), 'Content-Type': 'application/json'}
         };
-				fetch(`${process.env.REACT_APP_BACKEND_API}/api/scholars/bulk_upload`, requestOptions).then(resp => {
+				fetch(`${API_BASE_URL}/api/scholars/bulk_upload`, requestOptions).then(resp => {
           if(resp.status == 403) history.push('/auth/login')
           return resp.json();
         }).then(res => {
@@ -292,7 +293,7 @@ function Payments() {
 
   const onDelete = (row) => {
     setLoading(true);
-		fetch(process.env.REACT_APP_BACKEND_API + '/api/scholars/' + row.id, {method: 'DELETE', headers: {...authHeader(), 'Content-Type': 'application/json'}}).then(resp => {
+		fetch(API_BASE_URL + '/api/scholars/' + row.id, {method: 'DELETE', headers: {...authHeader(), 'Content-Type': 'application/json'}}).then(resp => {
       if(resp.status == 403) history.push('/auth/login')
       return resp.json();
     }).then(res => {

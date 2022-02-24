@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import {API_BASE_URL} from "../../../../configs/AppConfig";
 
 const RJSSocket = (props) => {
     const user = JSON.parse(localStorage.getItem('axie_user'));
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const connect = io(process.env.REACT_APP_BACKEND_API, { transports: ["websocket"] });
+        const connect = io(API_BASE_URL, { transports: ["websocket"] });
 
         connect.emit('user_id', user.id);
         connect.on('message', (msg) => {
