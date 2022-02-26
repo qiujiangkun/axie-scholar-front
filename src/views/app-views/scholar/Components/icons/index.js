@@ -40,7 +40,7 @@ const AverageScholarMMRIcon = () => (
 
 const AverageWinRateIcon = () => (
   <svg width="56" height="57" viewBox="0 0 56 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clip-path="url(#clip0_339_372)">
+    <g clipPath="url(#clip0_339_372)">
       <path
         d="M52.5539 6.1H13.3539V0.5H7.75391V56.5H13.3539V34.1H52.5539L46.9539 20.1L52.5539 6.1ZM35.7539 20.1C35.7539 23.18 33.2339 25.7 30.1539 25.7C27.0739 25.7 24.5539 23.18 24.5539 20.1C24.5539 17.02 27.0739 14.5 30.1539 14.5C33.2339 14.5 35.7539 17.02 35.7539 20.1Z"
         fill="#FF8B00"
